@@ -16,6 +16,7 @@ from .etat import EtatPartage, Tentative
 from .journal import Journal
 from .llm import ClientLLM
 from .outils import chiffres as ch
+from .outils.coherence import coherent
 from .outils.langue import ModeleQuadrigrammes
 from .outils.registre import ContexteOutil
 
@@ -29,10 +30,12 @@ def _procede(outil: str) -> str:
 class Orchestrateur:
     def __init__(self, client: ClientLLM | None, modele: ModeleQuadrigrammes, dossier_traces: Path | None = None,
                  max_iterations: int = 4, delai_outil_s: float = 120.0, graine: int = 0,
-                 pannes: Callable[[str], None] | None = None, avec_pedagogue: bool = True):
+                 pannes: Callable[[str], None] | None = None, avec_pedagogue: bool = True,
+                 verifier_coherence: bool = True, masquer_extraits: bool = False):
         self.client, self.modele, self.dossier_traces = client, modele, dossier_traces
         self.max_iterations, self.delai_outil_s, self.graine = max_iterations, delai_outil_s, graine
         self.pannes, self.avec_pedagogue = pannes, avec_pedagogue
+        self.verifier_coherence, self.masquer_extraits = verifier_coherence, masquer_extraits
 
     def resoudre(self, identifiant: str, chiffre_brut: str, langue: str = "fr") -> EtatPartage:
         lettres = ch.normaliser(chiffre_brut)
@@ -78,7 +81,7 @@ class Orchestrateur:
             etat.procede = meilleure.procede if meilleure else None
         if etat.statut == "succes" and self.avec_pedagogue:
             ped = agents["pedagogue"]
-            sortie, _ = ped.decider(etat, {"extrait": (etat.clair or "")[:120]})
+            sortie, _ = ped.decider(etat, {"extrait": "(non fourni)" if self.masquer_extraits else (etat.clair or "")[:120]})
             etat.explication = sortie.explication
 
     def _iteration(self, etat: EtatPartage, journal: Journal, agents: dict) -> None:
@@ -101,8 +104,13 @@ class Orchestrateur:
         procede = _procede(appel.outil)
 
         obs_li = li.observer(etat, resultat["clair"])
+        if self.masquer_extraits:
+            obs_li["extrait"] = "(non fourni)"
         sortie_li, source = li.decider(etat, obs_li)
         plausible = obs_li["score"]["plausible"]       # le code fait foi ; l'avis du modèle est journalisé
+        if plausible and self.verifier_coherence and not coherent(procede, resultat["cle"], resultat["clair"], etat.chiffre_lettres):
+            journal.ecrire("incoherence_outil", "orchestrateur", procede=procede, cle=resultat["cle"])
+            plausible = False
         if source == "llm" and sortie_li.plausible != plausible:
             journal.ecrire("desaccord_linguiste", "linguiste", avis_modele=sortie_li.plausible, score=plausible)
         etat.tentatives.append(Tentative(procede=procede, outil=appel.outil, arguments=appel.arguments,

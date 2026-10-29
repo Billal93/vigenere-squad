@@ -65,10 +65,30 @@ def cmd_evaluer(args: argparse.Namespace) -> int:
         ev.experience_kasiski(brut / "kasiski.jsonl")
     elif args.what == "shannon":
         ev.experience_shannon(brut / "shannon.jsonl")
+    elif args.what == "menaces":
+        print(json.dumps(ev.experience_menaces_deterministes(brut / "menaces.json"), ensure_ascii=False))
+    elif args.what == "injection":
+        ev.experience_injection_llm(args.modele, args.repetitions, brut / f"injection_{args.modele}.jsonl")
+    return 0
+
+
+def cmd_exercice(args: argparse.Namespace) -> int:
+    from .exercices import generer_exercice, verifier_corrige
+    ex = generer_exercice(args.procede, ev.modeles_langue()["fr"], args.longueur, args.graine)
+    print(f"Exercice ({ex['procede']}, {ex['longueur']} lettres) : {ex['enonce']['consigne']}")
+    print()
+    print(ex["enonce"]["chiffre"])
+    if not args.sans_corrige:
+        ecarts = verifier_corrige(ex)
+        print()
+        print(f"--- Corrigé (vérifié par les outils : {'oui' if not ecarts else 'NON ' + str(ecarts)}) ---")
+        print(json.dumps(ex["corrige"], ensure_ascii=False, indent=1))
     return 0
 
 
 def main(argv: list[str] | None = None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     p = argparse.ArgumentParser(prog="vsquad", description="Vigenère-Squad")
     sp = p.add_subparsers(dest="cmd", required=True)
     r = sp.add_parser("resoudre", help="casser un chiffré et afficher la trace")
@@ -84,12 +104,17 @@ def main(argv: list[str] | None = None) -> int:
     j.add_argument("--verifier", action="store_true")
     j.set_defaults(f=cmd_rejouer)
     e = sp.add_parser("evaluer", help="lancer une partie de l'évaluation")
-    e.add_argument("what", choices=["baseline", "llm", "kasiski", "shannon"])
+    e.add_argument("what", choices=["baseline", "llm", "kasiski", "shannon", "menaces", "injection"])
     e.add_argument("--variantes", nargs="+", default=["base", "sans_espaces", "fautes5", "anglais"])
     e.add_argument("--modele", default="petit", choices=["petit", "tres_petit"])
     e.add_argument("--repetitions", type=int, default=3)
     e.add_argument("--limite", type=int)
     e.set_defaults(f=cmd_evaluer)
+    x = sp.add_parser("exercice", help="générer un exercice avec corrigé vérifié (Pédagogue)")
+    x.add_argument("--procede", default="vigenere", choices=["cesar", "affine", "vigenere", "beaufort", "autoclave", "substitution"])
+    x.add_argument("--longueur", type=int, default=300); x.add_argument("--graine", type=int, default=1)
+    x.add_argument("--sans-corrige", action="store_true")
+    x.set_defaults(f=cmd_exercice)
     args = p.parse_args(argv)
     return args.f(args)
 

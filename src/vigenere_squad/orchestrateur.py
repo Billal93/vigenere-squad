@@ -36,7 +36,9 @@ class Orchestrateur:
 
     def resoudre(self, identifiant: str, chiffre_brut: str, langue: str = "fr") -> EtatPartage:
         lettres = ch.normaliser(chiffre_brut)
-        journal = Journal(self.dossier_traces / f"{identifiant}.jsonl" if self.dossier_traces else None, identifiant)
+        nom_fichier = identifiant.replace("#", "_")
+        journal = Journal(self.dossier_traces / f"{nom_fichier}.jsonl" if self.dossier_traces else None, identifiant)
+        self.dernier_journal = journal
         etat = EtatPartage(identifiant=identifiant, chiffre_lettres=lettres, langue=langue,
                            gabarit=chiffre_brut if chiffre_brut != lettres else None)
         journal.ecrire("debut", "orchestrateur", longueur=len(lettres), langue=langue,

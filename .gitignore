@@ -12,3 +12,5 @@ TODO_HUMAIN.md
 *.sec
 minisign.key
 .env
+traces/smoke/
+

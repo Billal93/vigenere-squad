@@ -116,10 +116,8 @@ def remettre_en_forme(lettres: str, gabarit: str) -> str:
     it = iter(lettres)
     sortie = []
     for c in gabarit:
-        if ch.normaliser(c):
-            sortie.append(next(it))
-        else:
-            sortie.append(c)
+        k = len(ch.normaliser(c))      # 2 pour une ligature (œ, æ), 0 pour un espace ou une ponctuation
+        sortie.append("".join(next(it) for _ in range(k)) if k else c)
     return "".join(sortie)
 
 

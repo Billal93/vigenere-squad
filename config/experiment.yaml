@@ -1,0 +1,23 @@
+# Paramètres de l'expérience. Les digests sont ceux relevés par l'API locale d'Ollama (/api/tags)
+# le 2026-10-29 sur la machine de développement.
+graine: 42
+repetitions: 3
+temperature: 0.0
+contexte: 8192          # profil 16 Go de l'Annexe A
+ollama:
+  version: "0.40.13"
+  hote: "http://localhost:11434"
+modeles:
+  petit:                # configuration (b) : tient dans 8 Go
+    etiquette: "qwen3:4b"
+    digest: "sha256:359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+  grand:                # configuration (c) : taille différente
+    etiquette: "qwen3:8b"
+    digest: "sha256:500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+  integration_continue: # CI et make reproduce-small
+    etiquette: "qwen3:0.6b"
+    digest: "sha256:7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435"
+corpus:
+  tranches: [80, 150, 300, 600, 1000, 2000]
+  par_cellule: 5
+  procedes: [cesar, affine, vigenere, autoclave, substitution, beaufort]

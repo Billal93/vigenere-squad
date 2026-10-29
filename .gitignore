@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+data/gutenberg/
+data/modeles/
+TODO_HUMAIN.md
+*.key
+*.sec
+minisign.key
+.env

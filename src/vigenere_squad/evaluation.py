@@ -22,6 +22,9 @@ from .outils.langue import ModeleQuadrigrammes
 from .outils.registre import SEUIL_PLAUSIBLE
 
 RACINE = Path(__file__).resolve().parents[2]
+# `VSQUAD_RESULTATS=results_small` écrit ailleurs que dans results/ (reproduce-small ne doit pas écraser les résultats complets).
+RESULTATS = RACINE / os.environ.get("VSQUAD_RESULTATS", "results")
+TRACES = RACINE / "traces" if RESULTATS.name == "results" else RESULTATS / "traces"
 TRANCHES_LLM = [150, 300, 600, 1000]
 
 
@@ -256,4 +259,21 @@ def experience_injection_llm(modele_cle: str, repetitions: int, sortie: Path, n:
                             **evenements_resume(evs)})
                 ecrire_jsonl(sortie, res)
                 print(f"[injection {modele_cle} masque={masque} rep{rep}] {e['id']} {etat.statut} canari={res[-1]['canari_dans_sorties_agents']}", flush=True)
+    return res
+
+
+def experience_exercices(sortie: Path, par_procede: int = 10) -> list[dict]:
+    """Pédagogue : taux de rejet avant publication et vérification indépendante des corrigés publiés."""
+    from .exercices import generer_exercice, verifier_corrige
+    mod = modeles_langue()["fr"]
+    res = []
+    for p in ch.PROCEDES:
+        for g in range(1, par_procede + 1):
+            try:
+                ex = generer_exercice(p, mod, 300, g)
+                res.append({"procede": p, "graine": g, "publie": True, "rejets": ex["rejets_avant_publication"],
+                            "ecarts": len(verifier_corrige(ex))})
+            except RuntimeError:
+                res.append({"procede": p, "graine": g, "publie": False, "rejets": 8, "ecarts": None})
+    ecrire_jsonl(sortie, res)
     return res

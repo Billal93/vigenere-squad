@@ -15,3 +15,5 @@ minisign.key
 traces/smoke/
 
 results/logs/
+results_small/
+results_small_site/

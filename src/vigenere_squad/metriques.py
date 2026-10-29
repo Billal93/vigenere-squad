@@ -12,7 +12,7 @@ from pathlib import Path
 import numpy as np
 
 from . import corpus
-from .evaluation import RACINE, TRANCHES_LLM, sous_echantillon
+from .evaluation import RACINE, RESULTATS, TRANCHES_LLM, sous_echantillon
 from .outils import chiffres as ch
 from .outils.langue import ModeleQuadrigrammes, indices, indices_quadrigrammes
 from .outils.registre import SEUIL_PLAUSIBLE
@@ -197,13 +197,41 @@ def calculer(raw: Path, sortie: Path) -> dict:
             metriques.setdefault("explications", {})[cle] = bloc_explications(r, modele_fr)
     if ablation:
         metriques["ablation"] = ablation
+    if (raw / "menaces.json").exists():
+        m = json.loads((raw / "menaces.json").read_text(encoding="utf-8"))
+        for k in m:
+            if isinstance(m[k], dict):
+                m[k].pop("detail", None)
+        metriques["menaces"] = m
+    for cle in ("tres_petit", "petit"):
+        inj = lire(raw / f"injection_{cle}.jsonl")
+        if inj:
+            bloc = {}
+            for masque in (False, True):
+                sel = [r for r in inj if r["masquage"] == masque]
+                bloc["avec_masquage" if masque else "sans_masquage"] = {
+                    "executions": len(sel),
+                    "canari_dans_les_sorties_des_agents_pct": pct([r["canari_dans_sorties_agents"] for r in sel]),
+                    "canari_dans_l_explication_pct": pct([r["canari_dans_explication"] for r in sel]),
+                    "clair_exact_pct": pct([r["clair_exact"] for r in sel]),
+                    "replis": sum(r["replis"] for r in sel), "erreurs_de_sortie": sum(r["erreurs_sortie"] for r in sel)}
+            metriques.setdefault("menaces", {}).setdefault("injection_dans_le_clair", {})[cle] = bloc
+    exo = lire(raw / "exercices.jsonl")
+    if exo:
+        metriques["exercices_pedagogue"] = {
+            "generes": len(exo), "publies_pct": pct([r["publie"] for r in exo]),
+            "corriges_verifies_pct": pct([r["publie"] and r["ecarts"] == 0 for r in exo]),
+            "rejets_moyens_avant_publication": round(statistics.fmean(r["rejets"] for r in exo), 3),
+            "par_procede": {p: {"publies_pct": pct([r["publie"] for r in exo if r["procede"] == p]),
+                                "rejets_moyens": round(statistics.fmean(r["rejets"] for r in exo if r["procede"] == p), 2)}
+                            for p in PROCEDES}}
     sortie.parent.mkdir(parents=True, exist_ok=True)
     sortie.write_text(json.dumps(metriques, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
     return metriques
 
 
 if __name__ == "__main__":
-    m = calculer(RACINE / "results" / "raw", RACINE / "results" / "metrics.json")
+    m = calculer(RESULTATS / "raw", RESULTATS / "metrics.json")
     from .figures import tracer
-    tracer(m, RACINE / "results" / "figures")
+    tracer(m, RESULTATS / "figures")
     print("metrics.json écrit :", ", ".join(m))

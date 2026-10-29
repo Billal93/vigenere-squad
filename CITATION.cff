@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Si vous utilisez ce logiciel ou ses résultats, merci de le citer avec ces métadonnées."
+title: "Vigenère-Squad : cryptanalyse de chiffrements classiques par agents LLM encadrés"
+type: software
+authors:
+  - family-names: "BENNAT"
+    given-names: "Billal"
+repository-code: "https://github.com/Billal93/vigenere-squad"
+url: "https://billal93.github.io/vigenere-squad/"
+license: MIT
+version: "1.0.0"
+abstract: >-
+  Système multi-agents (Classifieur, Cryptanalyste, Linguiste, Pédagogue) qui casse des chiffrements classiques
+  avec des outils déterministes, un orchestrateur explicite, des traces JSONL rejouables, une ablation sans modèle,
+  avec un petit modèle et avec un second modèle, et un modèle de menace évalué. Projet individuel bonus du cours
+  Cryptographie appliquée et IA agentique, SUP DE VINCI, 2026.
+keywords:
+  - cryptanalyse
+  - Vigenère
+  - agents LLM
+  - reproductibilité
+  - Ollama

@@ -53,8 +53,7 @@ def cmd_rejouer(args: argparse.Namespace) -> int:
 
 
 def cmd_evaluer(args: argparse.Namespace) -> int:
-    brut = ev.RACINE / "results" / "raw"
-    traces = ev.RACINE / "traces"
+    brut, traces = ev.RESULTATS / "raw", ev.TRACES
     if args.what == "baseline":
         for v in args.variantes:
             r = ev.evaluer_sans_llm(v, brut / f"sans_llm_{v}.jsonl", args.limite)
@@ -67,6 +66,8 @@ def cmd_evaluer(args: argparse.Namespace) -> int:
         ev.experience_shannon(brut / "shannon.jsonl")
     elif args.what == "menaces":
         print(json.dumps(ev.experience_menaces_deterministes(brut / "menaces.json"), ensure_ascii=False))
+    elif args.what == "exercices":
+        ev.experience_exercices(brut / "exercices.jsonl")
     elif args.what == "injection":
         ev.experience_injection_llm(args.modele, args.repetitions, brut / f"injection_{args.modele}.jsonl")
     return 0
@@ -104,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
     j.add_argument("--verifier", action="store_true")
     j.set_defaults(f=cmd_rejouer)
     e = sp.add_parser("evaluer", help="lancer une partie de l'évaluation")
-    e.add_argument("what", choices=["baseline", "llm", "kasiski", "shannon", "menaces", "injection"])
+    e.add_argument("what", choices=["baseline", "llm", "kasiski", "shannon", "menaces", "injection", "exercices"])
     e.add_argument("--variantes", nargs="+", default=["base", "sans_espaces", "fautes5", "anglais"])
     e.add_argument("--modele", default="petit", choices=["petit", "tres_petit"])
     e.add_argument("--repetitions", type=int, default=3)

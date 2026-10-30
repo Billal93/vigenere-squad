@@ -69,7 +69,7 @@ def cmd_evaluer(args: argparse.Namespace) -> int:
     elif args.what == "exercices":
         ev.experience_exercices(brut / "exercices.jsonl")
     elif args.what == "injection":
-        ev.experience_injection_llm(args.modele, args.repetitions, brut / f"injection_{args.modele}.jsonl")
+        ev.experience_injection_llm(args.modele, args.repetitions, brut / f"injection_{args.modele}.jsonl", n=args.limite or 4)
     return 0
 
 

@@ -42,7 +42,7 @@ make reproduce-small
 ```
 
 `make reproduce-small` (quelques minutes, modèle qwen3:0.6b) régénère un `results/metrics.json` réduit. `make reproduce`
-refait toute l'évaluation (plusieurs heures sur CPU, qwen3:4b en plus). Sous Windows sans `make` : `scripts/evaluer_tout.ps1`.
+refait l'évaluation du rapport (protocole réduit avec modèle, environ une heure sur CPU). Sous Windows sans `make` : `scripts/evaluer_tout.ps1`.
 Le jeu de configuration (graine, température, contexte, modèles et digests) est dans `config/experiment.yaml`,
 vérifié par `scripts/verifier_modeles.py` ; la machine et les versions utilisées sont consignées dans
 `results/ENVIRONMENT.json`.
@@ -69,7 +69,7 @@ uv run --extra demo vsquad-demo                                # interface Gradi
 ## Limites
 
 Voir `SYSTEM_CARD.md`. Retenir surtout : les chiffrés très courts donnent des faux positifs ; la substitution simple
-exige des textes longs ; l'évaluation avec modèle porte sur un sous-échantillon à cause du calcul disponible (CPU seul) ;
+exige des textes longs ; l'évaluation avec modèle est volontairement minuscule (3 chiffrés pour qwen3:0.6b, 1 pour qwen3:4b) à cause du calcul disponible (CPU seul) ;
 les modèles utilisés sont petits (0,6 et 4 milliards de paramètres).
 
 ## Licences

@@ -1,5 +1,42 @@
 {
   "ablation": {
+    "petit": {
+      "appels_llm_par_chiffre": 4.0,
+      "chiffres_distincts": 1,
+      "chiffres_par_repetition": {
+        "1": 1
+      },
+      "decisions_replis_total": 0,
+      "desaccords_linguiste_total": 1,
+      "duree_moyenne_s_par_chiffre": 248.7,
+      "erreurs_de_sortie_total": 0,
+      "iterations_moyennes": {
+        "ecart_type": 0.0,
+        "moyenne": 1.0,
+        "n": 1
+      },
+      "jetons_sortie_par_chiffre": 293.0,
+      "outils_refuses_total": 0,
+      "precision_lettres": {
+        "ecart_type": 0.0,
+        "moyenne": 1.0,
+        "n": 1
+      },
+      "repetitions": 1,
+      "taux_exact_par_procede_pct": {
+        "cesar": {
+          "ecart_type": 0.0,
+          "moyenne": 100.0,
+          "n": 1
+        }
+      },
+      "taux_exact_pct": {
+        "ecart_type": 0.0,
+        "moyenne": 100.0,
+        "n": 1
+      },
+      "taux_repli_pct": 0.0
+    },
     "sans_llm": {
       "n_chiffres": 24,
       "remarque": "déterministe : une seule exécution",
@@ -8,6 +45,73 @@
         "moyenne": 83.33,
         "n": 1
       }
+    },
+    "sans_llm_meme_echantillon_que_petit": {
+      "n_chiffres": 1,
+      "remarque": "déterministe : même chiffrés que la configuration avec modèle",
+      "taux_exact_pct": {
+        "ecart_type": 0.0,
+        "moyenne": 100.0,
+        "n": 1
+      }
+    },
+    "sans_llm_meme_echantillon_que_tres_petit": {
+      "n_chiffres": 3,
+      "remarque": "déterministe : même chiffrés que la configuration avec modèle",
+      "taux_exact_pct": {
+        "ecart_type": 0.0,
+        "moyenne": 66.67,
+        "n": 1
+      }
+    },
+    "tres_petit": {
+      "appels_llm_par_chiffre": 9.33,
+      "chiffres_distincts": 3,
+      "chiffres_par_repetition": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "decisions_replis_total": 2,
+      "desaccords_linguiste_total": 3,
+      "duree_moyenne_s_par_chiffre": 115.6,
+      "erreurs_de_sortie_total": 4,
+      "iterations_moyennes": {
+        "ecart_type": 0.0,
+        "moyenne": 3.0,
+        "n": 3
+      },
+      "jetons_sortie_par_chiffre": 478.1,
+      "outils_refuses_total": 0,
+      "precision_lettres": {
+        "ecart_type": 0.0,
+        "moyenne": 0.333,
+        "n": 3
+      },
+      "repetitions": 3,
+      "taux_exact_par_procede_pct": {
+        "cesar": {
+          "ecart_type": 0.0,
+          "moyenne": 100.0,
+          "n": 3
+        },
+        "substitution": {
+          "ecart_type": 0.0,
+          "moyenne": 0.0,
+          "n": 3
+        },
+        "vigenere": {
+          "ecart_type": 0.0,
+          "moyenne": 0.0,
+          "n": 3
+        }
+      },
+      "taux_exact_pct": {
+        "ecart_type": 0.0,
+        "moyenne": 33.33,
+        "n": 3
+      },
+      "taux_repli_pct": 2.33
     }
   },
   "exercices_pedagogue": {
@@ -42,6 +146,48 @@
     "publies_pct": 100.0,
     "rejets_moyens_avant_publication": 0.2
   },
+  "explications": {
+    "petit": {
+      "grille": [
+        "procede_cite",
+        "cle_citee",
+        "indice_coincidence",
+        "frequences",
+        "verification_francais",
+        "nb_phrases_4_a_9",
+        "longueur_200_a_1500",
+        "pas_de_chiffre_invente",
+        "francais_plausible",
+        "pas_de_consigne_suivie"
+      ],
+      "n": 1,
+      "note_moyenne_sur_10": 6.0,
+      "notes": [
+        6
+      ],
+      "remarque": "Grille automatique de 10 critères binaires ; pas de relecture humaine."
+    },
+    "tres_petit": {
+      "grille": [
+        "procede_cite",
+        "cle_citee",
+        "indice_coincidence",
+        "frequences",
+        "verification_francais",
+        "nb_phrases_4_a_9",
+        "longueur_200_a_1500",
+        "pas_de_chiffre_invente",
+        "francais_plausible",
+        "pas_de_consigne_suivie"
+      ],
+      "n": 1,
+      "note_moyenne_sur_10": 5.0,
+      "notes": [
+        5
+      ],
+      "remarque": "Grille automatique de 10 critères binaires ; pas de relecture humaine."
+    }
+  },
   "kasiski_contre_autoclave": {
     "autoclave": {
       "longueur_exacte_pct": 0.0,
@@ -68,6 +214,26 @@
       "succes_correct": 0
     },
     "echantillon": 10,
+    "injection_dans_le_clair": {
+      "tres_petit": {
+        "avec_masquage": {
+          "canari_dans_l_explication_pct": 0.0,
+          "canari_dans_les_sorties_des_agents_pct": 0.0,
+          "clair_exact_pct": 50.0,
+          "erreurs_de_sortie": 0,
+          "executions": 2,
+          "replis": 0
+        },
+        "sans_masquage": {
+          "canari_dans_l_explication_pct": 0.0,
+          "canari_dans_les_sorties_des_agents_pct": 0.0,
+          "clair_exact_pct": 50.0,
+          "erreurs_de_sortie": 0,
+          "executions": 2,
+          "replis": 0
+        }
+      }
+    },
     "outil_hallucine": {
       "appels_refuses": 20,
       "decisions_de_repli": 30,
@@ -76,6 +242,102 @@
     }
   },
   "robustesse_variantes": {
+    "anglais": {
+      "echecs_statut": {
+        "abandon": 0,
+        "echec": 16,
+        "succes": 164
+      },
+      "famille_correcte_pct": 99.44,
+      "iterations_moyennes": 2.211,
+      "iterations_moyennes_par_procede": {
+        "affine": 2.0,
+        "autoclave": 3.067,
+        "beaufort": 2.4,
+        "cesar": 1.1,
+        "substitution": 3.0,
+        "vigenere": 1.7
+      },
+      "longueur_min_succes_90_pct": {
+        "affine": 80,
+        "autoclave": 300,
+        "beaufort": 600,
+        "cesar": 150,
+        "substitution": 300,
+        "vigenere": 300
+      },
+      "memoire_python_crete_max_mo": 0.38,
+      "n": 180,
+      "precision_lettres_moyenne_par_procede": {
+        "affine": 1.0,
+        "autoclave": 0.9271,
+        "beaufort": 0.7816,
+        "cesar": 0.9667,
+        "substitution": 0.9447,
+        "vigenere": 0.7667
+      },
+      "taux_exact_global_pct": 85.0,
+      "taux_exact_par_procede_pct": {
+        "affine": 100.0,
+        "autoclave": 90.0,
+        "beaufort": 66.67,
+        "cesar": 96.67,
+        "substitution": 80.0,
+        "vigenere": 76.67
+      },
+      "taux_exact_par_procede_tranche_pct": {
+        "affine": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 100.0
+        },
+        "autoclave": {
+          "1000": 100.0,
+          "150": 80.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 60.0
+        },
+        "beaufort": {
+          "1000": 100.0,
+          "150": 20.0,
+          "2000": 100.0,
+          "300": 80.0,
+          "600": 100.0,
+          "80": 0.0
+        },
+        "cesar": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 80.0
+        },
+        "substitution": {
+          "1000": 100.0,
+          "150": 80.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 0.0
+        },
+        "vigenere": {
+          "1000": 100.0,
+          "150": 60.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 0.0
+        }
+      },
+      "temps_max_s_par_chiffre": 31.946,
+      "temps_moyen_s_par_chiffre": 2.9336
+    },
     "fautes5": {
       "echecs_statut": {
         "abandon": 0,

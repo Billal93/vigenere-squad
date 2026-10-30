@@ -31,16 +31,16 @@ reproduce-small: data environment
 	$(UV) run vsquad evaluer llm --modele tres_petit --repetitions 1 --limite 6
 	$(MAKE) metrics
 
-# Version complète : plusieurs heures sur CPU (voir docs/rapport.pdf, section Reproductibilité).
+# Protocole du rapport : environ 1 heure sur CPU (référence sans modèle sur 4 x 180 chiffrés, puis évaluations réduites avec modèle).
 reproduce: data environment models
 	$(UV) run vsquad evaluer baseline
 	$(UV) run vsquad evaluer kasiski
 	$(UV) run vsquad evaluer shannon
 	$(UV) run vsquad evaluer menaces
 	$(UV) run vsquad evaluer exercices
-	$(UV) run vsquad evaluer llm --modele tres_petit
-	$(UV) run vsquad evaluer llm --modele petit
-	$(UV) run vsquad evaluer injection --modele tres_petit
+	$(UV) run vsquad evaluer llm --modele tres_petit --repetitions 3 --tranche 300 --limite 3
+	$(UV) run vsquad evaluer llm --modele petit --repetitions 1 --tranche 300 --limite 1
+	$(UV) run vsquad evaluer injection --modele tres_petit --repetitions 1 --limite 2
 	$(MAKE) metrics
 
 audit:

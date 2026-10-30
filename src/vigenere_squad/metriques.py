@@ -195,6 +195,13 @@ def calculer(raw: Path, sortie: Path) -> dict:
         if r:
             b = bloc_llm(r)
             ablation[cle] = b
+            if base:
+                ids = {x["id"] for x in r}
+                sub = [x for x in base if x["id"] in ids]
+                b["chiffres_distincts"] = len(ids)
+                ablation["sans_llm_meme_echantillon_que_" + cle] = {
+                    "n_chiffres": len(sub), "taux_exact_pct": {"moyenne": pct([x["exact"] for x in sub]), "ecart_type": 0.0, "n": 1},
+                    "remarque": "déterministe : même chiffrés que la configuration avec modèle"}
             metriques.setdefault("explications", {})[cle] = bloc_explications(r, modele_fr)
     if ablation:
         metriques["ablation"] = ablation

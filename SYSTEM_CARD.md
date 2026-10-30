@@ -26,8 +26,9 @@ Corpus d'évaluation : 4 variantes (base, sans espaces, fautes à 5 %, anglais) 
 ## Évaluation
 Voir `results/metrics.json` et `docs/rapport.pdf`. Trois configurations comparées pour l'ablation : sans modèle,
 petit modèle (qwen3:0.6b), second modèle de taille différente (qwen3:4b). Les mesures dépendant du modèle sont
-répétées trois fois (moyenne ± écart-type) ; l'évaluation avec modèle porte sur un sous-échantillon de 24 chiffrés, la
-référence sans modèle sur les 720.
+répétées trois fois quand le protocole le permet (moyenne ± écart-type). Protocole réduit, CPU seul, démonstration du concept :
+3 chiffrés × 3 répétitions pour qwen3:0.6b, 1 chiffré × 1 répétition pour qwen3:4b, 2 chiffrés pour l'injection ; la référence
+sans modèle porte sur les 720 chiffrés. Aucun pourcentage obtenu avec un modèle n'a de valeur statistique.
 
 ## Limites connues
 - Les chiffrés très courts (quelques dizaines de lettres) produisent des faux positifs : un clair absurde peut obtenir un score plausible.

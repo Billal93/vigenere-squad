@@ -157,8 +157,7 @@ def main() -> None:
     (SITE / "figures").mkdir(parents=True, exist_ok=True)
     for p in (RESULTATS / "figures").glob("*.png"):
         shutil.copy(p, SITE / "figures" / p.name)
-    (SITE / "index.html").write_text(construire(m, env), encoding="utf-8", newline="
-")
+    (SITE / "index.html").write_text(construire(m, env), encoding="utf-8", newline="\n")
     print(f"{SITE.name}/index.html écrit")
 
 

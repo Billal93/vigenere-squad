@@ -11,6 +11,10 @@ Les résultats sont très inégaux selon le procédé. César et le chiffrement 
 
 ![Réussite par procédé et par longueur](../results/figures/succes_par_procede_et_longueur.png)
 
+Voici la résolution d'un chiffré de Vigenère de 300 lettres sans modèle.
+
+![Résolution d'un chiffré de Vigenère](img/resoudre_vigenere.png)
+
 ## 5.2 Robustesse aux variantes
 
 La variante sans espaces ni ponctuation donne exactement les mêmes résultats que la base, ce qui est attendu puisque le système normalise le texte avant toute analyse. Ce n'est donc pas une mesure indépendante, et je ne la présente pas comme telle. Les deux autres variantes sont plus informatives. Avec 5 % de fautes de frappe dans le chiffré, le taux de clairs exacts tombe à {{robustesse_variantes.fautes5.taux_exact_global_pct|pct}}, et la chute est surtout due à la substitution simple ({{robustesse_variantes.fautes5.taux_exact_par_procede_pct.substitution|pct}}) : une seule lettre fautive modifie le texte clair, et les clairs « exacts » exigent une égalité stricte. Sur le texte en anglais, alors que le modèle de langue du système est français, le taux de clairs exacts reste à {{robustesse_variantes.anglais.taux_exact_global_pct|pct}}, tandis que les attaques les plus fines en souffrent, par exemple Beaufort à {{robustesse_variantes.anglais.taux_exact_par_procede_pct.beaufort|pct}}.
@@ -86,14 +90,6 @@ L'installation tient en quelques commandes décrites dans le `README.md` : clone
 
 J'ai construit un système de quatre agents qui casse six chiffrements classiques en laissant à du code déterministe la cryptanalyse et la décision de succès. La référence sans modèle donne {{sans_llm.taux_exact_global_pct|pct}} de clairs exacts sur {{sans_llm.n|n0}} chiffrés, avec des résultats très inégaux selon le procédé et la longueur, et une limite nette de la méthode de Kasiski sur l'autoclave. Les contre-mesures contre les données d'outil empoisonnées et les outils hallucinés fonctionnent, et sont mesurées. L'évaluation avec modèles est trop réduite pour conclure sur leur apport, ce que je dis plutôt que de le masquer.
 
-# Annexe A. Traces réelles
-
-![Résolution d'un chiffré de César sans modèle](img/resoudre_cesar.png)
-
-![Rejeu d'une trace avec vérification](img/rejouer_verifier.png)
-
-![Génération d'un exercice](img/exercice.png)
-
-# Annexe B. Intégrité et usage de l'IA
+# Annexe A. Intégrité et usage de l'IA
 
 Les nombres du rapport sont lus dans `results/metrics.json`. Le code et les premières versions des textes ont été écrits par l'assistant Claude Code à partir de mes instructions ; ce que j'ai moi-même fait, relu et compris est décrit dans `AI_USAGE.md`. Aucun secret ne figure dans le dépôt, les prompts ou les traces. Les résultats défavorables sont publiés.

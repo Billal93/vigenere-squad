@@ -1,6 +1,6 @@
 @page { size: A4; margin: 24mm 22mm 24mm 22mm; @bottom-center { content: counter(page); font-family: "Times New Roman", serif; font-size: 10pt; } }
 body { font-family: "Times New Roman", Times, serif; font-size: 11.5pt; line-height: 1.45; color: #111; text-align: justify; hyphens: auto; }
-h1 { font-size: 20pt; margin: 28pt 0 10pt; page-break-before: always; text-align: left; }
+h1 { font-size: 20pt; margin: 28pt 0 10pt; text-align: left; }
 h1.titre, .titre-page h1 { page-break-before: avoid; }
 h2 { font-size: 14pt; margin: 18pt 0 6pt; text-align: left; }
 h3 { font-size: 12pt; font-style: italic; margin: 12pt 0 4pt; text-align: left; }
@@ -18,3 +18,13 @@ pre { background: #f3f3f0; padding: 6pt 8pt; border-left: 2pt solid #999; white-
 .titre-page p { text-align: center; font-size: 12.5pt; }
 .resume { margin: 10pt 0; }
 .toc { font-size: 11pt; }
+
+.titre-page { page-break-after: always; min-height: 190mm; }
+.titre-page .ecole { font-size: 13pt; letter-spacing: 1pt; text-transform: uppercase; color: #111; margin-bottom: 38mm; }
+.titre-page h1 { border: none; }
+.titre-gros { font-family: "Times New Roman", serif; font-size: 30pt; font-weight: bold; color: #111; margin: 0 0 6pt; }
+.sous-titre { font-size: 15pt; margin-bottom: 14mm; }
+h1[id="1-introduction"] { page-break-before: always; }
+img { max-width: 88%; max-height: 120mm; }
+.titre-page .titre-gros { font-size: 32pt; }
+.titre-page .sous-titre { font-size: 15pt; margin-bottom: 14mm; }

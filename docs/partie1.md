@@ -1,8 +1,10 @@
-<div class="titre-page">
+<div class="titre-page" markdown="1">
 
-# Vigenère-Squad
+<p class="ecole">SUP DE VINCI · Mastère Cybersécurité</p>
 
-## Cryptanalyse de chiffrements classiques par un système de quatre agents LLM encadrés
+<p class="titre-gros">Vigenère-Squad</p>
+
+<p class="sous-titre">Cryptanalyse de chiffrements classiques par un système de quatre agents LLM encadrés</p>
 
 Projet individuel bonus, cours « Cryptographie appliquée et IA agentique »
 
@@ -16,7 +18,7 @@ Dépôt : https://github.com/Billal93/vigenere-squad
 
 </div>
 
-<div class="resume">
+<div class="resume" markdown="1">
 
 **Résumé.** Ce rapport présente Vigenère-Squad, un système qui casse automatiquement six chiffrements classiques (César, affine, Vigenère, Beaufort, autoclave et substitution simple) au moyen de quatre agents spécialisés pilotés par un orchestrateur explicite. Les opérations cryptographiques et statistiques sont confiées à des outils déterministes ; les modèles de langage, de petite taille et exécutés localement sur processeur, choisissent les outils dans des listes fermées et rédigent des explications, mais ne décident jamais seuls du succès d'une attaque. L'évaluation porte sur {{sans_llm.n}} chiffrés à graine fixe pour la référence sans modèle, et sur un échantillon volontairement minuscule pour les deux modèles testés (trois chiffrés avec trois répétitions pour le plus petit, un chiffré pour l'autre), parce que la machine n'a pas de carte graphique. Sans modèle, le système retrouve le clair exact pour {{sans_llm.taux_exact_global_pct|pct}} des chiffrés de la variante de base. Le rapport décrit aussi un modèle de menace du système lui-même, avec des contre-mesures dont l'effet est mesuré, et une ablation qui compare l'apport réel des agents à celui des outils seuls. Tous les nombres de ce document sont lus dans `results/metrics.json` au moment de la construction du PDF.
 
@@ -70,6 +72,10 @@ Shannon définit la distance d'unicité d'un chiffrement comme la longueur de te
 
 Le système est un programme Python dont l'orchestrateur est écrit explicitement : il ne laisse pas un modèle décider de l'ordre d'exécution. Il maintient un état partagé typé (modèles Pydantic) qui contient le chiffré normalisé, la famille supposée, les procédés déjà écartés, les tentatives et le statut. À chaque itération, il consulte successivement le Classifieur, le Cryptanalyste et le Linguiste. Si le Linguiste juge le clair plausible, la boucle s'arrête et le Pédagogue explique la démarche. Sinon, le procédé est écarté et le Classifieur est reconsulté, dans la limite de quatre itérations.
 
+![Parcours d'un chiffré : agents, outils et contrôle du code](img/schema_architecture.png)
+
+*Figure : le parcours d'un chiffré. Les éléments verts sont du code déterministe.*
+
 ## 3.2 Les quatre agents
 
 Chaque agent possède un prompt système versionné (fichier `prompts/<agent>.v1.md`), une liste fermée d'outils et un schéma de sortie JSON validé par Pydantic. Le tableau suivant résume leurs rôles.
@@ -85,17 +91,35 @@ Chaque agent possède un prompt système versionné (fichier `prompts/<agent>.v1
 
 Trois dispositions limitent le rôle du modèle. D'abord, le texte chiffré n'est jamais transmis par les arguments que le modèle écrit : l'exécuteur d'outils l'injecte depuis le contexte, le modèle ne fournit que des paramètres comme une longueur de clé. Ensuite, la décision de plausibilité appartient au code : le score de quadrigrammes est calculé par l'outil et comparé au seuil, l'avis du Linguiste étant seulement journalisé s'il diverge. Enfin, un contrôle de cohérence rechiffre le clair proposé avec la clé annoncée et exige de retrouver exactement le chiffré, ce qui écarte un résultat d'outil falsifié même si le texte proposé est du français parfait.
 
+Le contrôle de cohérence est du code : il rechiffre le clair annoncé avec la clé annoncée.
+
+![Contrôle de cohérence](img/code_coherence.png)
+
+L'orchestrateur applique ce contrôle avant d'accepter une hypothèse ; l'avis du modèle n'est que journalisé.
+
+![Décision de plausibilité dans l'orchestrateur](img/code_orchestrateur.png)
+
 ## 3.4 Robustesse aux défaillances
 
 Quand le modèle renvoie un JSON invalide, une réponse vide ou un objet qui ne respecte pas le schéma, l'agent réessaie une fois puis se replie sur sa décision déterministe, ce que la trace mentionne. Un appel à un outil hors de la liste de l'agent est refusé avant exécution, journalisé sous le type `outil_refuse`, et traité comme une réponse invalide. Un outil en panne ou trop lent déclenche une reprise puis un abandon propre. Ces comportements sont couverts par des tests d'injection de pannes.
+
+![Liste fermée d'outils appliquée par l'exécuteur](img/code_base.png)
 
 ## 3.5 Traçabilité
 
 Chaque message envoyé au modèle, chaque réponse, chaque appel d'outil, chaque refus et chaque décision est écrit dans un fichier JSONL horodaté, un par chiffré. La commande `vsquad rejouer` relit une trace, et avec l'option `--verifier` contrôle que chaque appel d'outil figure bien dans la liste de son agent.
 
+Une résolution sans modèle d'un chiffré de César, puis le rejeu de la trace avec vérification des listes d'outils.
+
+![Résolution d'un chiffré de César](img/resoudre_cesar.png)
+
+![Rejeu d'une trace avec vérification](img/rejouer_verifier.png)
+
 ## 3.6 Le Pédagogue et les exercices
 
 Au-delà de l'explication, le Pédagogue sait générer des exercices. À partir d'un clair du corpus, d'un procédé et d'une graine, le système tire une clé, chiffre le texte, puis exécute l'orchestrateur sans modèle pour produire le corrigé. L'exercice n'est publié que si le clair retrouvé est identique au clair d'origine ; sinon il est rejeté et un autre est tiré. Une seconde fonction, indépendante, revérifie tout exercice publié en rechiffrant le clair du corrigé avec la clé du corrigé et en recalculant les valeurs d'indice de coïncidence qui y figurent.
+
+![Génération d'un exercice vérifié](img/exercice.png)
 
 # 4. Méthode d'évaluation
 

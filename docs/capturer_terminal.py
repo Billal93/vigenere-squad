@@ -27,6 +27,8 @@ CAPTURES = [
     ("rejouer_verifier", "vsquad rejouer traces/exemple/manuel.jsonl --verifier",
      ["vsquad", "rejouer", "traces/exemple/manuel.jsonl", "--verifier"], 30),
     ("exercice", "vsquad exercice --procede vigenere --graine 4", ["vsquad", "exercice", "--procede", "vigenere", "--graine", "4"], 34),
+    ("resoudre_vigenere", 'vsquad resoudre "GBHPRVNKLYBISWHG…" --modele aucun',
+     ["vsquad", "resoudre", "GBHPRVNKLYBISWHGMSSTGMBZPMFGMXCJIVTRMFGSORHBZBEXKHSMYIVGSXDSSPPHPUIYPGPXUBIUROREYIPCLMMHPGVHJBHHGTHIUGIOCOBFIVGEHPFEIWFHZTDWGCPBENIWZTRQSIRCBBDSINCYFQAIULRRDHLGWUBGMUWGMBHXIPUGBBPWUGUAMCWVGVYDPWVWVXUHUWKOPYTGQWWBDDRVFDSMCXCIHZTPTKVUBJMMFKDIAVYGCYBOJROCLQDTENCVLGGJTCLIFNMUVKBOPYUGQLFLIHQUPGRLCUZBMGIO", "--modele", "aucun", "--traces", "traces/exemple_vigenere"], 36),
     ("tests", "pytest -q --cov", ["python", "-m", "pytest", "-q", "--cov"], 28),
 ]
 

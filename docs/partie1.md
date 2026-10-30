@@ -6,15 +6,13 @@
 
 <p class="sous-titre">Cryptanalyse de chiffrements classiques par un système de quatre agents LLM encadrés</p>
 
-Projet individuel bonus, cours « Cryptographie appliquée et IA agentique »
+<p class="matiere">Cryptographie appliquée et IA agentique</p>
 
-SUP DE VINCI, année 2026, enseignant : Yulliwas AMEUR
+<p class="auteur">BENNAT Billal</p>
 
-**BENNAT Billal**
+<p class="enseignant">Enseignant : Yulliwas AMEUR</p>
 
-Sujet 1 : Vigenère-Squad. Version 1.0.0
-
-Dépôt : https://github.com/Billal93/vigenere-squad
+<p class="depot">Dépôt du projet<br><a href="https://github.com/Billal93/vigenere-squad">https://github.com/Billal93/vigenere-squad</a></p>
 
 </div>
 

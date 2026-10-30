@@ -12,14 +12,16 @@ dont j'ai gardé la trace. L'assistant a aussi lancé les évaluations, relevé 
 de `results/metrics.json`.
 
 ## Mon rôle (BENNAT Billal)
-J'ai choisi le sujet 1, fixé les règles d'intégrité (aucune valeur inventée, résultats négatifs publiés, aucun secret
-dans le dépôt), validé le périmètre et les étapes, fourni les comptes et les actions manuelles (publication, DOI,
-signature) et exécuté ou fait exécuter les vérifications finales. Je ne suis pas développeur de métier : je n'ai pas
-écrit le code ligne à ligne.
+Le sujet 1 (Vigenère-Squad) a été comparé aux autres et proposé par l'assistant (`PLAN.md`), puis je l'ai validé.
 
-> **[À COMPLÉTER PAR L'AUTEUR]** Préciser ici ce que j'ai effectivement relu, rejoué et compris (par exemple : j'ai relancé
-> `make reproduce-small`, lu le rapport, vérifié les chiffres du rapport contre `results/metrics.json`). Cette section ne
-> doit contenir que ce que j'ai réellement fait.
+Les concepts viennent du cours : je les connaissais et c'est moi qui les ai donnés à l'assistant (par exemple la cryptanalyse classique, l'indice de coïncidence, Kasiski, la distance d'unicité, le principe « le modèle propose, le code décide »). Je me suis
+en revanche beaucoup aidé de Claude Code pour tout ce qui est rédaction technique : le code, les tests, le rapport, les
+scripts d'évaluation, la page de résultats et la préparation de la vidéo. Je ne suis pas développeur de métier : je n'ai pas
+écrit le code ligne à ligne, et je ne prétends pas l'avoir fait.
+
+Ce que j'ai décidé ou validé : le sujet, les règles d'intégrité (aucune valeur inventée, résultats négatifs publiés, aucun secret dans
+le dépôt), le périmètre, la réduction du protocole d'évaluation (quelques minutes de calcul, pour montrer le concept), et les
+actions de publication. Les évaluations avec modèle sont donc volontairement minuscules, et le rapport le dit.
 
 ## Ce qui a été vérifié automatiquement
 Tests unitaires et d'intégration (dont pannes injectées), couverture des outils déterministes, gitleaks, génération des

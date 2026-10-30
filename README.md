@@ -72,6 +72,14 @@ Voir `SYSTEM_CARD.md`. Retenir surtout : les chiffrés très courts donnent des 
 exige des textes longs ; l'évaluation avec modèle est volontairement minuscule (3 chiffrés pour qwen3:0.6b, 1 pour qwen3:4b) à cause du calcul disponible (CPU seul) ;
 les modèles utilisés sont petits (0,6 et 4 milliards de paramètres).
 
+## Vérifier la signature
+`SHA256SUMS` est signé avec minisign (clé publique dans `minisign.pub`, identifiant `A80540466CC63A79`) :
+
+```bash
+minisign -Vm SHA256SUMS -p minisign.pub
+sha256sum -c SHA256SUMS
+```
+
 ## Licences
 
 Code : MIT (`LICENSE`). Documentation, données et résultats : CC BY 4.0 (`LICENSE-DOCS.md`). Les textes de

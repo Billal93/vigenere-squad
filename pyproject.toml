@@ -1,7 +1,7 @@
 [project]
 name = "vigenere-squad"
 version = "0.1.0"
-description = "Équipe multi-agents qui casse les chiffrements classiques, avec outils déterministes testés"
+description = "Ã‰quipe multi-agents qui casse les chiffrements classiques, avec outils dÃ©terministes testÃ©s"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -18,7 +18,7 @@ dependencies = [
 demo = ["gradio>=5.0"]
 
 [dependency-groups]
-dev = ["pytest>=8", "pytest-cov>=5", "matplotlib>=3.9"]
+dev = ["pytest>=8", "pytest-cov>=5", "matplotlib>=3.9", "markdown>=3.6"]
 
 [project.scripts]
 vsquad = "vigenere_squad.cli:main"

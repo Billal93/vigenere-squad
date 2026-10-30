@@ -1,0 +1,46 @@
+{
+ "systeme": {
+  "os": "Windows-11-10.0.26100-SP0",
+  "machine": "AMD64",
+  "cpu": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+  "coeurs_logiques": 12,
+  "ram_totale_go": 15.4,
+  "gpu": "aucun utilisé (CPU seul)"
+ },
+ "python": "3.12.10",
+ "uv": null,
+ "git": "git version 2.41.0.windows.2",
+ "commit": "ea754c94f8572aa05a2fb2cf5cbeb263f396d819",
+ "ollama": {
+  "hote": "http://localhost:11434",
+  "joignable": true,
+  "version": "0.40.13",
+  "modeles_installes": {
+   "qwen3:8b": "sha256:500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+   "qwen3:4b": "sha256:359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+   "qwen3:0.6b": "sha256:7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435"
+  },
+  "digests_conformes_a_la_config": {
+   "qwen3:4b": true,
+   "qwen3:0.6b": true
+  }
+ },
+ "paquets": {
+  "PyYAML": "6.0.3",
+  "httpx": "0.28.1",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "psutil": "7.2.2",
+  "pydantic": "2.14.1",
+  "pytest": "9.2.0"
+ },
+ "empreintes_donnees": {
+  "data/corpus/anglais.jsonl": "34af60ff6dae8d470cb8849c67c3e8944120ad51daa6bf03ff30beaa436b659d",
+  "data/corpus/base.jsonl": "4481c6e62d0da1300bf0c7d3eb09a0237c206b21f9457e3042dd2a4e33431f54",
+  "data/corpus/fautes5.jsonl": "ce512f8af9652787d308712fd5e92f7170d6027e58f750c5268144fe96bf4999",
+  "data/corpus/sans_espaces.jsonl": "ae89424a2e027159adffb0a37b7d20ed5896b6f73a1908d9553a4704632d0020"
+ },
+ "graine": 42,
+ "temperature": 0.3,
+ "contexte": 8192
+}

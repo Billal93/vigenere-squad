@@ -1,0 +1,542 @@
+{
+  "ablation": {
+    "sans_llm": {
+      "n_chiffres": 24,
+      "remarque": "déterministe : une seule exécution",
+      "taux_exact_pct": {
+        "ecart_type": 0.0,
+        "moyenne": 83.33,
+        "n": 1
+      }
+    }
+  },
+  "exercices_pedagogue": {
+    "corriges_verifies_pct": 100.0,
+    "generes": 60,
+    "par_procede": {
+      "affine": {
+        "publies_pct": 100.0,
+        "rejets_moyens": 0.0
+      },
+      "autoclave": {
+        "publies_pct": 100.0,
+        "rejets_moyens": 0.0
+      },
+      "beaufort": {
+        "publies_pct": 100.0,
+        "rejets_moyens": 0.2
+      },
+      "cesar": {
+        "publies_pct": 100.0,
+        "rejets_moyens": 0.0
+      },
+      "substitution": {
+        "publies_pct": 100.0,
+        "rejets_moyens": 0.7
+      },
+      "vigenere": {
+        "publies_pct": 100.0,
+        "rejets_moyens": 0.3
+      }
+    },
+    "publies_pct": 100.0,
+    "rejets_moyens_avant_publication": 0.2
+  },
+  "kasiski_contre_autoclave": {
+    "autoclave": {
+      "longueur_exacte_pct": 0.0,
+      "longueur_juste_ou_diviseur_pct": 40.0,
+      "n": 15,
+      "score_vrai_sur_score_max_moyen": 0.369
+    },
+    "vigenere": {
+      "longueur_exacte_pct": 40.0,
+      "longueur_juste_ou_diviseur_pct": 86.67,
+      "n": 15,
+      "score_vrai_sur_score_max_moyen": 0.966
+    }
+  },
+  "menaces": {
+    "donnees_empoisonnees_avec_controle_de_coherence": {
+      "essais": 10,
+      "faux_succes": 0,
+      "succes_correct": 5
+    },
+    "donnees_empoisonnees_sans_controle_de_coherence": {
+      "essais": 10,
+      "faux_succes": 10,
+      "succes_correct": 0
+    },
+    "echantillon": 10,
+    "outil_hallucine": {
+      "appels_refuses": 20,
+      "decisions_de_repli": 30,
+      "essais": 10,
+      "resolus_malgre_tout": 10
+    }
+  },
+  "robustesse_variantes": {
+    "fautes5": {
+      "echecs_statut": {
+        "abandon": 0,
+        "echec": 14,
+        "succes": 166
+      },
+      "famille_correcte_pct": 98.89,
+      "iterations_moyennes": 2.183,
+      "iterations_moyennes_par_procede": {
+        "affine": 2.0,
+        "autoclave": 3.067,
+        "beaufort": 2.433,
+        "cesar": 1.0,
+        "substitution": 3.0,
+        "vigenere": 1.6
+      },
+      "longueur_min_succes_90_pct": {
+        "affine": 80,
+        "autoclave": 150,
+        "beaufort": 1000,
+        "cesar": 80,
+        "substitution": null,
+        "vigenere": 300
+      },
+      "memoire_python_crete_max_mo": 0.38,
+      "n": 180,
+      "precision_lettres_moyenne_par_procede": {
+        "affine": 1.0,
+        "autoclave": 0.9267,
+        "beaufort": 0.7769,
+        "cesar": 1.0,
+        "substitution": 0.9684,
+        "vigenere": 0.7887
+      },
+      "taux_exact_global_pct": 77.78,
+      "taux_exact_par_procede_pct": {
+        "affine": 100.0,
+        "autoclave": 90.0,
+        "beaufort": 73.33,
+        "cesar": 100.0,
+        "substitution": 30.0,
+        "vigenere": 73.33
+      },
+      "taux_exact_par_procede_tranche_pct": {
+        "affine": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 100.0
+        },
+        "autoclave": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 40.0
+        },
+        "beaufort": {
+          "1000": 100.0,
+          "150": 60.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 80.0,
+          "80": 0.0
+        },
+        "cesar": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 100.0
+        },
+        "substitution": {
+          "1000": 20.0,
+          "150": 0.0,
+          "2000": 60.0,
+          "300": 20.0,
+          "600": 60.0,
+          "80": 20.0
+        },
+        "vigenere": {
+          "1000": 100.0,
+          "150": 20.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 20.0
+        }
+      },
+      "temps_max_s_par_chiffre": 25.898,
+      "temps_moyen_s_par_chiffre": 2.8992
+    },
+    "sans_espaces": {
+      "echecs_statut": {
+        "abandon": 0,
+        "echec": 9,
+        "succes": 171
+      },
+      "famille_correcte_pct": 98.89,
+      "iterations_moyennes": 2.106,
+      "iterations_moyennes_par_procede": {
+        "affine": 2.0,
+        "autoclave": 3.1,
+        "beaufort": 2.233,
+        "cesar": 1.0,
+        "substitution": 3.0,
+        "vigenere": 1.3
+      },
+      "longueur_min_succes_90_pct": {
+        "affine": 80,
+        "autoclave": 150,
+        "beaufort": 300,
+        "cesar": 80,
+        "substitution": 2000,
+        "vigenere": 300
+      },
+      "memoire_python_crete_max_mo": 0.38,
+      "n": 180,
+      "precision_lettres_moyenne_par_procede": {
+        "affine": 1.0,
+        "autoclave": 0.8967,
+        "beaufort": 0.8609,
+        "cesar": 1.0,
+        "substitution": 0.9845,
+        "vigenere": 0.8672
+      },
+      "taux_exact_global_pct": 83.33,
+      "taux_exact_par_procede_pct": {
+        "affine": 100.0,
+        "autoclave": 86.67,
+        "beaufort": 76.67,
+        "cesar": 100.0,
+        "substitution": 66.67,
+        "vigenere": 70.0
+      },
+      "taux_exact_par_procede_tranche_pct": {
+        "affine": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 100.0
+        },
+        "autoclave": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 20.0
+        },
+        "beaufort": {
+          "1000": 100.0,
+          "150": 60.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 0.0
+        },
+        "cesar": {
+          "1000": 100.0,
+          "150": 100.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 100.0
+        },
+        "substitution": {
+          "1000": 40.0,
+          "150": 40.0,
+          "2000": 100.0,
+          "300": 80.0,
+          "600": 100.0,
+          "80": 40.0
+        },
+        "vigenere": {
+          "1000": 100.0,
+          "150": 0.0,
+          "2000": 100.0,
+          "300": 100.0,
+          "600": 100.0,
+          "80": 20.0
+        }
+      },
+      "temps_max_s_par_chiffre": 31.912,
+      "temps_moyen_s_par_chiffre": 2.932
+    }
+  },
+  "sans_llm": {
+    "echecs_statut": {
+      "abandon": 0,
+      "echec": 9,
+      "succes": 171
+    },
+    "famille_correcte_pct": 98.89,
+    "iterations_moyennes": 2.106,
+    "iterations_moyennes_par_procede": {
+      "affine": 2.0,
+      "autoclave": 3.1,
+      "beaufort": 2.233,
+      "cesar": 1.0,
+      "substitution": 3.0,
+      "vigenere": 1.3
+    },
+    "longueur_min_succes_90_pct": {
+      "affine": 80,
+      "autoclave": 150,
+      "beaufort": 300,
+      "cesar": 80,
+      "substitution": 2000,
+      "vigenere": 300
+    },
+    "memoire_python_crete_max_mo": 0.38,
+    "n": 180,
+    "precision_lettres_moyenne_par_procede": {
+      "affine": 1.0,
+      "autoclave": 0.8967,
+      "beaufort": 0.8609,
+      "cesar": 1.0,
+      "substitution": 0.9845,
+      "vigenere": 0.8672
+    },
+    "taux_exact_global_pct": 83.33,
+    "taux_exact_par_procede_pct": {
+      "affine": 100.0,
+      "autoclave": 86.67,
+      "beaufort": 76.67,
+      "cesar": 100.0,
+      "substitution": 66.67,
+      "vigenere": 70.0
+    },
+    "taux_exact_par_procede_tranche_pct": {
+      "affine": {
+        "1000": 100.0,
+        "150": 100.0,
+        "2000": 100.0,
+        "300": 100.0,
+        "600": 100.0,
+        "80": 100.0
+      },
+      "autoclave": {
+        "1000": 100.0,
+        "150": 100.0,
+        "2000": 100.0,
+        "300": 100.0,
+        "600": 100.0,
+        "80": 20.0
+      },
+      "beaufort": {
+        "1000": 100.0,
+        "150": 60.0,
+        "2000": 100.0,
+        "300": 100.0,
+        "600": 100.0,
+        "80": 0.0
+      },
+      "cesar": {
+        "1000": 100.0,
+        "150": 100.0,
+        "2000": 100.0,
+        "300": 100.0,
+        "600": 100.0,
+        "80": 100.0
+      },
+      "substitution": {
+        "1000": 40.0,
+        "150": 40.0,
+        "2000": 100.0,
+        "300": 80.0,
+        "600": 100.0,
+        "80": 40.0
+      },
+      "vigenere": {
+        "1000": 100.0,
+        "150": 0.0,
+        "2000": 100.0,
+        "300": 100.0,
+        "600": 100.0,
+        "80": 20.0
+      }
+    },
+    "temps_max_s_par_chiffre": 36.265,
+    "temps_moyen_s_par_chiffre": 3.7702
+  },
+  "seuil_plausibilite": -5.5,
+  "shannon": {
+    "distance_unicite_theorique_par_cle": {
+      "10": 22.8,
+      "11": 25.0,
+      "12": 27.3,
+      "3": 6.8,
+      "4": 9.1,
+      "5": 11.4,
+      "6": 13.7,
+      "7": 15.9,
+      "8": 18.2,
+      "9": 20.5
+    },
+    "h_cond_ordre3_bits_par_lettre": 2.634,
+    "lettres_apprentissage": 3673932,
+    "longueur_min_succes_90_par_cle": {
+      "10": 300,
+      "11": 300,
+      "12": 400,
+      "3": 300,
+      "4": 300,
+      "5": 300,
+      "6": 200,
+      "7": 160,
+      "8": 200,
+      "9": 300
+    },
+    "redondance_D_bits_par_lettre": 2.066,
+    "remarque": "L'entropie d'ordre 3 surestime l'entropie réelle de la langue, donc D est sous-estimée et la distance d'unicité sur-estimée.",
+    "taux_par_cle_et_longueur_pct": {
+      "10": {
+        "120": 25.0,
+        "1200": 100.0,
+        "160": 50.0,
+        "200": 70.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 95.0,
+        "400": 100.0,
+        "50": 0.0,
+        "600": 100.0,
+        "80": 0.0,
+        "800": 100.0
+      },
+      "11": {
+        "120": 15.0,
+        "1200": 100.0,
+        "160": 50.0,
+        "200": 70.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 95.0,
+        "400": 95.0,
+        "50": 0.0,
+        "600": 100.0,
+        "80": 0.0,
+        "800": 100.0
+      },
+      "12": {
+        "120": 0.0,
+        "1200": 100.0,
+        "160": 25.0,
+        "200": 50.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 85.0,
+        "400": 90.0,
+        "50": 0.0,
+        "600": 100.0,
+        "80": 0.0,
+        "800": 100.0
+      },
+      "3": {
+        "120": 40.0,
+        "1200": 95.0,
+        "160": 75.0,
+        "200": 80.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 100.0,
+        "400": 95.0,
+        "50": 5.0,
+        "600": 100.0,
+        "80": 5.0,
+        "800": 90.0
+      },
+      "4": {
+        "120": 65.0,
+        "1200": 100.0,
+        "160": 65.0,
+        "200": 65.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 95.0,
+        "400": 100.0,
+        "50": 5.0,
+        "600": 100.0,
+        "80": 30.0,
+        "800": 100.0
+      },
+      "5": {
+        "120": 30.0,
+        "1200": 100.0,
+        "160": 70.0,
+        "200": 85.0,
+        "2000": 100.0,
+        "30": 5.0,
+        "300": 100.0,
+        "400": 100.0,
+        "50": 0.0,
+        "600": 100.0,
+        "80": 30.0,
+        "800": 100.0
+      },
+      "6": {
+        "120": 55.00000000000001,
+        "1200": 100.0,
+        "160": 85.0,
+        "200": 90.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 90.0,
+        "400": 95.0,
+        "50": 10.0,
+        "600": 100.0,
+        "80": 30.0,
+        "800": 100.0
+      },
+      "7": {
+        "120": 75.0,
+        "1200": 100.0,
+        "160": 95.0,
+        "200": 95.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 100.0,
+        "400": 100.0,
+        "50": 5.0,
+        "600": 100.0,
+        "80": 25.0,
+        "800": 100.0
+      },
+      "8": {
+        "120": 25.0,
+        "1200": 100.0,
+        "160": 75.0,
+        "200": 90.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 95.0,
+        "400": 100.0,
+        "50": 0.0,
+        "600": 100.0,
+        "80": 10.0,
+        "800": 100.0
+      },
+      "9": {
+        "120": 30.0,
+        "1200": 100.0,
+        "160": 40.0,
+        "200": 85.0,
+        "2000": 100.0,
+        "30": 0.0,
+        "300": 95.0,
+        "400": 95.0,
+        "50": 0.0,
+        "600": 100.0,
+        "80": 15.0,
+        "800": 100.0
+      }
+    }
+  },
+  "version_schema": 1
+}

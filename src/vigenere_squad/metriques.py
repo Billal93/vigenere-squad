@@ -47,7 +47,8 @@ def longueur_min_90(par_tranche: dict[int, float], seuil: float = 90.0) -> int |
 def bloc_sans_llm(res: list[dict]) -> dict:
     par_proc: dict = {}
     par_proc_tranche: dict = {}
-    for p in PROCEDES:
+    presents = [p for p in PROCEDES if any(r["procede"] == p for r in res)]
+    for p in presents:
         sel = [r for r in res if r["procede"] == p]
         par_proc[p] = pct([r["exact"] for r in sel])
         par_proc_tranche[p] = {str(t): pct([r["exact"] for r in sel if r["tranche"] == t])
@@ -58,13 +59,13 @@ def bloc_sans_llm(res: list[dict]) -> dict:
         "taux_exact_par_procede_pct": par_proc,
         "taux_exact_par_procede_tranche_pct": par_proc_tranche,
         "longueur_min_succes_90_pct": {p: longueur_min_90({int(t): v for t, v in par_proc_tranche[p].items()})
-                                       for p in PROCEDES},
+                                       for p in presents},
         "precision_lettres_moyenne_par_procede": {p: round(statistics.fmean(
-            [r["precision_lettres"] for r in res if r["procede"] == p]), 4) for p in PROCEDES if res},
+            [r["precision_lettres"] for r in res if r["procede"] == p]), 4) for p in presents},
         "famille_correcte_pct": pct([r["famille_ok"] for r in res]),
         "iterations_moyennes": round(statistics.fmean([r["iterations"] for r in res]), 3) if res else None,
         "iterations_moyennes_par_procede": {p: round(statistics.fmean(
-            [r["iterations"] for r in res if r["procede"] == p]), 3) for p in PROCEDES if res},
+            [r["iterations"] for r in res if r["procede"] == p]), 3) for p in presents},
         "temps_moyen_s_par_chiffre": round(statistics.fmean([r["duree_s"] for r in res]), 4) if res else None,
         "temps_max_s_par_chiffre": max((r["duree_s"] for r in res), default=None),
         "memoire_python_crete_max_mo": max((r["memoire_python_crete_mo"] for r in res), default=None),
@@ -82,7 +83,7 @@ def bloc_llm(res: list[dict]) -> dict:
         "precision_lettres": moy_std([statistics.fmean([r["precision_lettres"] for r in v]) for v in par_rep.values()]),
         "iterations_moyennes": moy_std([statistics.fmean([r["iterations"] for r in v]) for v in par_rep.values()]),
         "taux_exact_par_procede_pct": {p: moy_std([pct([r["exact"] for r in v if r["procede"] == p])
-                                                    for v in par_rep.values()]) for p in PROCEDES},
+                                                    for v in par_rep.values()]) for p in PROCEDES if any(r["procede"] == p for r in res)},
         "duree_moyenne_s_par_chiffre": round(statistics.fmean([r["duree_s"] for r in res]), 1),
         "appels_llm_par_chiffre": round(statistics.fmean([r["appels_llm"] for r in res]), 2),
         "jetons_sortie_par_chiffre": round(statistics.fmean([r["jetons_sortie"] for r in res]), 1),

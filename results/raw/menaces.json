@@ -1,0 +1,143 @@
+{
+ "echantillon": 10,
+ "donnees_empoisonnees_sans_controle_de_coherence": {
+  "faux_succes": 10,
+  "succes_correct": 0,
+  "essais": 10,
+  "detail": [
+   {
+    "id": "fr-cesar-300-0",
+    "statut": "succes",
+    "motif": null,
+    "procede": "cesar"
+   },
+   {
+    "id": "fr-cesar-300-1",
+    "statut": "succes",
+    "motif": null,
+    "procede": "cesar"
+   },
+   {
+    "id": "fr-cesar-300-2",
+    "statut": "succes",
+    "motif": null,
+    "procede": "cesar"
+   },
+   {
+    "id": "fr-cesar-300-3",
+    "statut": "succes",
+    "motif": null,
+    "procede": "cesar"
+   },
+   {
+    "id": "fr-cesar-300-4",
+    "statut": "succes",
+    "motif": null,
+    "procede": "cesar"
+   },
+   {
+    "id": "fr-vigenere-300-0",
+    "statut": "succes",
+    "motif": null,
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-1",
+    "statut": "succes",
+    "motif": null,
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-2",
+    "statut": "succes",
+    "motif": null,
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-3",
+    "statut": "succes",
+    "motif": null,
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-4",
+    "statut": "succes",
+    "motif": null,
+    "procede": "vigenere"
+   }
+  ]
+ },
+ "donnees_empoisonnees_avec_controle_de_coherence": {
+  "faux_succes": 0,
+  "succes_correct": 5,
+  "essais": 10,
+  "detail": [
+   {
+    "id": "fr-cesar-300-0",
+    "statut": "succes",
+    "motif": null,
+    "procede": "affine"
+   },
+   {
+    "id": "fr-cesar-300-1",
+    "statut": "succes",
+    "motif": null,
+    "procede": "affine"
+   },
+   {
+    "id": "fr-cesar-300-2",
+    "statut": "succes",
+    "motif": null,
+    "procede": "affine"
+   },
+   {
+    "id": "fr-cesar-300-3",
+    "statut": "succes",
+    "motif": null,
+    "procede": "affine"
+   },
+   {
+    "id": "fr-cesar-300-4",
+    "statut": "succes",
+    "motif": null,
+    "procede": "affine"
+   },
+   {
+    "id": "fr-vigenere-300-0",
+    "statut": "echec",
+    "motif": "aucune hypothèse plausible dans la limite d'itérations",
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-1",
+    "statut": "echec",
+    "motif": "aucune hypothèse plausible dans la limite d'itérations",
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-2",
+    "statut": "echec",
+    "motif": "aucune hypothèse plausible dans la limite d'itérations",
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-3",
+    "statut": "echec",
+    "motif": "aucune hypothèse plausible dans la limite d'itérations",
+    "procede": "vigenere"
+   },
+   {
+    "id": "fr-vigenere-300-4",
+    "statut": "echec",
+    "motif": "aucune hypothèse plausible dans la limite d'itérations",
+    "procede": "vigenere"
+   }
+  ]
+ },
+ "outil_hallucine": {
+  "essais": 10,
+  "appels_refuses": 20,
+  "decisions_de_repli": 30,
+  "resolus_malgre_tout": 10
+ }
+}

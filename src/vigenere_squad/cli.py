@@ -59,7 +59,7 @@ def cmd_evaluer(args: argparse.Namespace) -> int:
             r = ev.evaluer_sans_llm(v, brut / f"sans_llm_{v}.jsonl", args.limite)
             print(v, sum(x["exact"] for x in r), "/", len(r))
     elif args.what == "llm":
-        ev.evaluer_llm(args.modele, args.repetitions, brut / f"llm_{args.modele}.jsonl", traces, args.limite)
+        ev.evaluer_llm(args.modele, args.repetitions, brut / f"llm_{args.modele}.jsonl", traces, args.limite, tranche=args.tranche)
     elif args.what == "kasiski":
         ev.experience_kasiski(brut / "kasiski.jsonl")
     elif args.what == "shannon":
@@ -110,6 +110,7 @@ def main(argv: list[str] | None = None) -> int:
     e.add_argument("--modele", default="petit", choices=["petit", "tres_petit"])
     e.add_argument("--repetitions", type=int, default=3)
     e.add_argument("--limite", type=int)
+    e.add_argument("--tranche", type=int, help="protocole réduit : un chiffré par procédé à cette longueur")
     e.set_defaults(f=cmd_evaluer)
     x = sp.add_parser("exercice", help="générer un exercice avec corrigé vérifié (Pédagogue)")
     x.add_argument("--procede", default="vigenere", choices=["cesar", "affine", "vigenere", "beaufort", "autoclave", "substitution"])
